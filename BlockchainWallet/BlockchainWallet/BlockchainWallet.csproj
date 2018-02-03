@@ -8,7 +8,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
-	 <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
     <PackageReference Include="Serilog" Version="2.6.0" />
@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlockchainWallet.Data\BlockchainWallet.Data.csproj" />
+    <ProjectReference Include="..\BlockchainWallet.Models\BlockchainWallet.Models.csproj" />
     <ProjectReference Include="..\BlockchainWallet.Services\BlockchainWallet.Services.csproj" />
     <ProjectReference Include="..\BlockchainWallet.Utils\BlockchainWallet.Utils.csproj" />
   </ItemGroup>

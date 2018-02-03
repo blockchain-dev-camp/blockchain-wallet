@@ -10,6 +10,7 @@ using BlockchainWallet.Services;
 namespace BlockchainWallet
 {
     using global::AutoMapper;
+    using Services;
 
     public class Startup
     {
@@ -22,8 +23,7 @@ namespace BlockchainWallet
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BlockchainDbContext>(options =>
-                options.UseInMemoryDatabase());
+            services.AddDbContext<BlockchainDbContext>(options => options.UseInMemoryDatabase());
             //options.UseSqlServer(Configuration.GetConnectionString("BlockchainDbConnection")));
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>)); 
@@ -33,6 +33,8 @@ namespace BlockchainWallet
             services.AddAutoMapper();
             services.AddMemoryCache();
             services.AddMvc();
+
+            services.AddTransient<AddressService, AddressService>();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
