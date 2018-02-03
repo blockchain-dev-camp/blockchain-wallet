@@ -119,7 +119,6 @@ namespace BlockchainWallet.Services
             {
                 //todo log error
                 Console.WriteLine(e.Message);
-                throw;
             }
 
             return result;
