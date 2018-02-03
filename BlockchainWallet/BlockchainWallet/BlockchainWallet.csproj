@@ -46,4 +46,10 @@
     <ProjectReference Include="..\BlockchainWallet.Utils\BlockchainWallet.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update=".bowerrc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
