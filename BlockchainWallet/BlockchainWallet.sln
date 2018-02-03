@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockchainWallet", "BlockchainWallet\BlockchainWallet.csproj", "{7457E514-CFC2-4482-AB1E-E3C0B96D23A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7457E514-CFC2-4482-AB1E-E3C0B96D23A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7457E514-CFC2-4482-AB1E-E3C0B96D23A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7457E514-CFC2-4482-AB1E-E3C0B96D23A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7457E514-CFC2-4482-AB1E-E3C0B96D23A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {942EB1F0-A0FD-407F-A12B-9E052B9D7856}
+	EndGlobalSection
+EndGlobal
