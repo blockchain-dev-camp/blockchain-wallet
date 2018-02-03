@@ -16,7 +16,7 @@
         public AddressDto CreateAddress()
         {
             var words = new List<string>();
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < MnemonicWords.RequiredWords; i++)
             {
                 var wordId = Rand.Next(0, MnemonicWords.Words.Count - 1);
                 words.Add(MnemonicWords.Words[wordId]);
