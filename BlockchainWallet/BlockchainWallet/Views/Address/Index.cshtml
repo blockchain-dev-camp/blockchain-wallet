@@ -1,0 +1,12 @@
+﻿@using BlockchainWallet.Models.ViewModels
+@model AddressViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div>Mnemonic: @Model.Mnemonic</div>
+<div>Private key: @Model.PrivateKey</div>
+<div>Public key: @Model.PublicKey</div>
+<div>Address: @Model.Address</div>
