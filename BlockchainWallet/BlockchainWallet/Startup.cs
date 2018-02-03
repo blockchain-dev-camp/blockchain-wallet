@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BlockchainWallet.Data;
 using BlockchainWallet.Data.Repos;
+using BlockchainWallet.Services;
 
 namespace BlockchainWallet
 {
@@ -26,6 +27,7 @@ namespace BlockchainWallet
             //options.UseSqlServer(Configuration.GetConnectionString("BlockchainDbConnection")));
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IHttpRequestService, HttpRequestService>();
 
             services.AddAutoMapper();
             services.AddMemoryCache();
