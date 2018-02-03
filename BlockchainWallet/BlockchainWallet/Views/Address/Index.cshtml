@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            @using (Html.BeginForm("Create", "Address", null, FormMethod.Post, true, new { @Class = "" }))
+            @using (Html.BeginForm("Create", "Address", null, FormMethod.Post, true, new { Class = "" }))
             {
                 @Html.AntiForgeryToken()
                 <span>Don't have a wallet? just </span>
@@ -17,12 +17,12 @@
             }
         </div>
         <div class="col-6">
-            @using (Html.BeginForm("Recover", "Address", null, FormMethod.Post, true, new { @Class = "" }))
+            @using (Html.BeginForm("Recover", "Address", null, FormMethod.Post, true, new { Class = "" }))
             {
                 @Html.AntiForgeryToken()
 
                 <span class="input-group">
-                    @Html.TextBox("mnemonic", null, new { @Class = "form-control" })
+                    @Html.TextBox("mnemonic", null, new { Class = "form-control", Placeholder = "Mnemonic" })
                     <input type="submit" value="Recover" class="btn btn-danger" />
                 </span>
             }
