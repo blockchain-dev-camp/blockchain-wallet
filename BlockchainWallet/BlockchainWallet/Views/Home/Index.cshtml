@@ -1,7 +1,40 @@
-﻿@{
+﻿@using BlockchainWallet.Controllers
+@{
     ViewData["Title"] = "Home Page";
 }
 
+<script>
+    
+    app.url = {};
+    app.url.getBalance = '@Url.Action(nameof(HomeController.Balance).RemoveControllerSuffix(), nameof(HomeController).RemoveControllerSuffix())';
+    
+</script>
+
 <div class="row">
-    Wallet
+    <div class="col col-sm-6">
+        Out Wallet! 
+    </div>
+    
+    <div class="col col-sm-6">
+        
+        <div class="row">
+            <div class="col col-sm-12 text-right">
+                <span>Account: </span>
+                <label id="account-address">9a9f082f37270ff54c5ca4204a0e4da6951fe917</label>
+            </div>
+            <div class="col col-sm-3 offset-6">
+                
+                <input class="form-control" id="user-balance" type="number" name="balance" value="" readonly="readonly"/>
+            </div>
+            <div class="col-sm-3">
+                <button id="btn-get-balance" class="btn btn-info" type="button">Get Balance</button>
+            </div>
+        </div>
+        
+    </div>
+
 </div>
+
+<script src="js/getBalance.js"></script>
+
+

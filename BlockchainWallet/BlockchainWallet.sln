@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockchainWallet", "BlockchainWallet\BlockchainWallet.csproj", "{7457E514-CFC2-4482-AB1E-E3C0B96D23A9}"
 EndProject
@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockchainWallet.Data", "Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockchainWallet.Models", "BlockchainWallet.Models\BlockchainWallet.Models.csproj", "{23C7BA06-D0A0-4EA8-8730-B5FEA71B9CE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockchainWallet.Services", "BlockchainWallet.Services\BlockchainWallet.Services.csproj", "{D65846A5-9955-42DB-8AF8-765BD49F7325}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockchainWallet.Services", "BlockchainWallet.Services\BlockchainWallet.Services.csproj", "{D65846A5-9955-42DB-8AF8-765BD49F7325}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockchainWallet.Utils", "BlockchainWallet.Utils\BlockchainWallet.Utils.csproj", "{8FC09E35-B686-4C15-AB24-EAF81D3E3FAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D65846A5-9955-42DB-8AF8-765BD49F7325}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D65846A5-9955-42DB-8AF8-765BD49F7325}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D65846A5-9955-42DB-8AF8-765BD49F7325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC09E35-B686-4C15-AB24-EAF81D3E3FAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC09E35-B686-4C15-AB24-EAF81D3E3FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC09E35-B686-4C15-AB24-EAF81D3E3FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC09E35-B686-4C15-AB24-EAF81D3E3FAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

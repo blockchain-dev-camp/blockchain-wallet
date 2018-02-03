@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlockchainWallet.Data\BlockchainWallet.Data.csproj" />
     <ProjectReference Include="..\BlockchainWallet.Services\BlockchainWallet.Services.csproj" />
+    <ProjectReference Include="..\BlockchainWallet.Utils\BlockchainWallet.Utils.csproj" />
   </ItemGroup>
 
 </Project>

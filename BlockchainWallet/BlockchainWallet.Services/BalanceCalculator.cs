@@ -26,6 +26,12 @@ namespace BlockchainWallet.Services
             // get blocks from Node
             var blocks = this.GetBlocks(urlNodeAddress, page++, sizePerPage);
 
+            if (blocks == null)
+            {
+                //todo log error
+                return balance.Current;
+            }
+
             while (isRunning)
             {
                 // get transactions from blocks and filter those ones that contain current address.
@@ -73,7 +79,7 @@ namespace BlockchainWallet.Services
         {
             nodeAddress = nodeAddress + string.Format(defaultBlockQueryUrl, page, sizePerPage);
 
-            var blocksAsJson = this.httpRequestService.SendRequest(nodeAddress, string.Empty, "Post");
+            var blocksAsJson = this.httpRequestService.SendRequest(nodeAddress, string.Empty, "GET");
 
             IEnumerable<Block> blocks = null;
 
