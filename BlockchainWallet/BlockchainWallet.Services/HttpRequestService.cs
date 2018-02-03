@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +40,7 @@ namespace BlockchainWallet.Services
 
                 if (useEncodeBase64)
                 {
-                    var strAsBytes = System.Text.Encoding.UTF8.GetBytes(data);
+                    var strAsBytes = Encoding.UTF8.GetBytes(data);
                     jsonObject = Convert.ToBase64String(strAsBytes);
                 }
                 

@@ -26,8 +26,9 @@ namespace BlockchainWallet
                 options.UseInMemoryDatabase());
             //options.UseSqlServer(Configuration.GetConnectionString("BlockchainDbConnection")));
 
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>)); 
             services.AddTransient<IHttpRequestService, HttpRequestService>();
+            services.AddTransient<IBalanceCalculator, BalanceCalculator>();
 
             services.AddAutoMapper();
             services.AddMemoryCache();
