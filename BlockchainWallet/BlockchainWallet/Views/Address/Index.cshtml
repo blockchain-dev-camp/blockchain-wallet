@@ -2,11 +2,57 @@
 @model AddressViewModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Address";
     Layout = "_Layout";
 }
 
-<div>Mnemonic: @Model.Mnemonic</div>
-<div>Private key: @Model.PrivateKey</div>
-<div>Public key: @Model.PublicKey</div>
-<div>Address: @Model.Address</div>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            @using (Html.BeginForm("Create", "Address", null, FormMethod.Post, true, new { Class = "" }))
+            {
+                @Html.AntiForgeryToken()
+                <span>Don't have a wallet? just </span>
+                <input type="submit" value="Create" class="btn btn-info btn-sm" />
+            }
+        </div>
+        <div class="col-6">
+            @using (Html.BeginForm("Recover", "Address", null, FormMethod.Post, true, new { Class = "" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <span class="input-group">
+                    @Html.TextBox("mnemonic", null, new { Class = "form-control", Placeholder = "Mnemonic" })
+                    <input type="submit" value="Recover" class="btn btn-danger" />
+                </span>
+            }
+            <span asp-validation-for="Mnemonic" class="alert-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="pt-5">
+    @if (@Model != null && ViewData.ModelState.IsValid)
+    {
+        <div class="row">
+            <div class="col-12">Write down the following mnemonic words. With the mnemonic words you can recover this wallet:</div>
+            <div class="col-12">
+                <strong>@Model.Mnemonic</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">Write down and keep in SECURE place your private key. Only through it you can access your coins:</div>
+            <div class="col-12">
+                <strong>@Model.PrivateKey</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">Public key:</div>
+            <div class="col-12">@Model.PublicKey</div>
+        </div>
+        <div class="row">
+            <div class="col-12">Address:</div>
+            <div class="col-12">@Model.Address</div>
+        </div>
+    }
+</div>

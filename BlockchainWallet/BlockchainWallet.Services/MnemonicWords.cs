@@ -2,8 +2,10 @@
 
 namespace BlockchainWallet.Services
 {
-    static class MnemonicWords
+    public static class MnemonicWords
     {
+        public static int RequiredWords = 12;
+
         public static List<string> Words = new List<string>()
         {
             "academy",
