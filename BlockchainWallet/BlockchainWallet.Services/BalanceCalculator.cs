@@ -18,26 +18,26 @@ namespace BlockchainWallet.Services
             this.httpRequestService = httpRequestService;
         }
 
-        public long GetBalance(string address, string nodeAddress, int page, int sizePerPage)
+        public long GetBalance(string account, string urlNodeAddress, int page, int sizePerPage)
         {
             bool isRunning = true;
             Balance balance = new Balance();
 
             // get blocks from Node
-            var blocks = this.GetBlocks(nodeAddress, page++, sizePerPage);
+            var blocks = this.GetBlocks(urlNodeAddress, page++, sizePerPage);
 
             while (isRunning)
             {
                 // get transactions from blocks and filter those ones that contain current address.
-                var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => x.From == address || x.To == address);
+                var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => x.From == account || x.To == account);
 
                 // calculate balance
-                this.CalculateBalanceByTransactions(neededTransaction, balance, address);
+                this.CalculateBalanceByTransactions(neededTransaction, balance, account);
 
                 // if blocks count less than sizePerPAge ... these are last blocks ... 
                 if (blocks.Count() >= sizePerPage)
                 {
-                    blocks = this.GetBlocks(nodeAddress, page++, sizePerPage);
+                    blocks = this.GetBlocks(urlNodeAddress, page++, sizePerPage);
                 }
                 else
                 {
@@ -48,9 +48,9 @@ namespace BlockchainWallet.Services
             return balance.Current;
         }
 
-        private void CalculateBalanceByTransactions(IEnumerable<Transaction> transactions, Balance balance, string address)
+        private void CalculateBalanceByTransactions(IEnumerable<Transaction> transactions, Balance balance, string account)
         {
-            if (transactions == null || balance == null || string.IsNullOrWhiteSpace(address))
+            if (transactions == null || balance == null || string.IsNullOrWhiteSpace(account))
             {
                 return;
             }
@@ -58,11 +58,11 @@ namespace BlockchainWallet.Services
             
             foreach (var transaction in transactions)
             {
-                if (transaction.To == address)
+                if (transaction.To == account)
                 {
                     balance.Income += transaction.Value;
                 }
-                else if (transaction.From == address)
+                else if (transaction.From == account)
                 {
                     balance.Outcome += transaction.Value;
                 }

@@ -6,6 +6,6 @@ namespace BlockchainWallet.Services
 {
     public interface IBalanceCalculator
     {
-        long GetBalance(string address, string nodeAddress, int page, int sizePerPage)
+        long GetBalance(string account, string urlNodeAddress, int page, int sizePerPage);
     }
 }
