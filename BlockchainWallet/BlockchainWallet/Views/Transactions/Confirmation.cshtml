@@ -17,7 +17,7 @@
 
         <br />
 
-        @using (@Html.BeginForm(nameof(TransactionController.Confirmation), nameof(TransactionController).RemoveControllerSuffix(), FormMethod.Post))
+        @using (@Html.BeginForm(nameof(TransactionsController.Confirmation), nameof(TransactionsController).RemoveControllerSuffix(), FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
@@ -70,7 +70,7 @@
             <div class="row form-group">
                 
                 <div class="col-sm-2 offset-4">
-                    @Html.ActionLink("Cancel", nameof(TransactionController.Index).RemoveControllerSuffix(), nameof(TransactionController).RemoveControllerSuffix(), null, new { @class="btn btn-secondary"})
+                    @Html.ActionLink("Cancel", nameof(TransactionsController.Index).RemoveControllerSuffix(), nameof(TransactionsController).RemoveControllerSuffix(), null, new { @class="btn btn-secondary"})
                 </div>
                 
                 

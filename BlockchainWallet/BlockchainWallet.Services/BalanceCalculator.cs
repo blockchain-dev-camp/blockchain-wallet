@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace BlockchainWallet.Services
@@ -78,7 +77,7 @@ namespace BlockchainWallet.Services
         {
             nodeAddress = nodeAddress + string.Format(defaultBlockQueryUrl, page, sizePerPage);
 
-            var blocksAsJson = this.httpRequestService.SendRequest(nodeAddress, string.Empty, "GET");
+            var blocksAsJson = httpRequestService.SendRequest(nodeAddress, string.Empty, "GET");
 
             IEnumerable<Block> blocks = null;
 

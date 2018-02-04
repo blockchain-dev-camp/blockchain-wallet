@@ -30,7 +30,7 @@
         
         <br />
         
-        @using (@Html.BeginForm(nameof(TransactionController.Index), nameof(TransactionController).RemoveControllerSuffix(), FormMethod.Post))
+        @using (@Html.BeginForm(nameof(TransactionsController.Index), nameof(TransactionsController).RemoveControllerSuffix(), FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 

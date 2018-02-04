@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BlockchainWallet.Data;
 using BlockchainWallet.Data.Repos;
-using BlockchainWallet.Services;
 
 namespace BlockchainWallet
 {

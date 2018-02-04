@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Transaction\Index.cshtml" />
+    <Content Remove="Views\Transactions\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Transaction\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Transactions\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Transaction\Index.cshtml" />
+    <None Include="Views\Transactions\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

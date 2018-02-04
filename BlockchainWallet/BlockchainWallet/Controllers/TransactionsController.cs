@@ -1,16 +1,15 @@
 ﻿using BlockchainWallet.Models.Dto;
 using BlockchainWallet.Utils.Globals;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace BlockchainWallet.Controllers
 {
     using System;
 
     [Route("Transaction")]
-    public class TransactionController : BaseController
+    public class TransactionsController : BaseController
     {
-        public TransactionController(IServiceProvider serviceProvider) : base(serviceProvider)
+        public TransactionsController(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
 
@@ -25,7 +24,7 @@ namespace BlockchainWallet.Controllers
                 dto = new TransactionDto();
             }
 
-            return View(dto);
+            return this.View(dto);
         }
 
         [HttpPost]
@@ -33,7 +32,7 @@ namespace BlockchainWallet.Controllers
         [Route("")]
         public IActionResult Index(TransactionDto transaction)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 //todo show exact error msg/msgs
                 transaction.Message = "Invalid Data !!!";
@@ -63,7 +62,7 @@ namespace BlockchainWallet.Controllers
 
             this.AddDtoToTempData(TempDataKeys.TransactionDto, dto);
 
-            return View(dto);
+            return this.View(dto);
         }
 
         [HttpPost]
@@ -111,7 +110,5 @@ namespace BlockchainWallet.Controllers
 
             return this.View(result);
         }
-
-        
     }
 }

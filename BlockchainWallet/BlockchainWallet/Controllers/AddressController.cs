@@ -3,7 +3,6 @@
 namespace BlockchainWallet.Controllers
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using global::AutoMapper;
     using Invoicer.Filters;

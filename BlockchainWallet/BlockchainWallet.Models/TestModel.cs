@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BlockchainWallet.Models
+﻿namespace BlockchainWallet.Models
 {
     public class TestModel
     {

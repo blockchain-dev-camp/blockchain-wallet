@@ -14,12 +14,12 @@ namespace BlockchainWallet.Controllers
         public IActionResult Index()
         {
             
-            return View();
+            return this.View();
         }
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
     }
 }
