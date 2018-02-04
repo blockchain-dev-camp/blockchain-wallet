@@ -1,0 +1,51 @@
+﻿
+@model Result
+
+<style>
+    .c-success {
+        color: white;
+        background-color: #4dffa6;
+        font-size: 1.7rem;
+        padding: 0.5rem 5rem;
+    }
+</style>
+
+@if (Model != null && Model.IsSuccess)
+{
+    <div class="row" style="font-size: 1.3rem;">
+        
+        <div class="col-sm-12 text-center">
+            <h2>Transaction Details</h2>
+        </div>
+        
+        @for (int i = 0; i < Model.Messages.Count; i++)
+        {
+            if (i == 0)
+            {
+                <div class="col-sm-12 text-center">
+                    <span class="c-success">@Model.Messages[i]</span>
+                </div>
+            }
+            else
+            {
+                <div class="col-sm-11 offset-1">
+                    <span>@Model.Messages[i]</span>
+                </div>
+            }
+        }
+
+    </div>
+}
+else if (Model != null)
+{
+    <div class="row">
+        @Html.Partial("_ErrorMessage", Model.Messages.FirstOrDefault())
+    </div>
+}
+else
+{
+    <div class="row">
+        @Html.Partial("_ErrorMessage", "No active transaction")
+    </div>
+}
+

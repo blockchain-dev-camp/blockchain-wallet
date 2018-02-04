@@ -1,0 +1,8 @@
+﻿@model string
+
+@if (!string.IsNullOrWhiteSpace(Model))
+{
+    <div class="col-sm-12 text-center alert-info-msg hide-on-click">
+        <h2>@Model</h2>
+    </div>
+}

@@ -35,7 +35,7 @@ namespace BlockchainWallet.Services
             while (isRunning)
             {
                 // get transactions from blocks and filter those ones that contain current address.
-                var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => x.From == account || x.To == account);
+                var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => (x.From == account || x.To == account) && x.Paid);
 
                 // calculate balance
                 this.CalculateBalanceByTransactions(neededTransaction, balance, account);
@@ -60,7 +60,6 @@ namespace BlockchainWallet.Services
             {
                 return;
             }
-
             
             foreach (var transaction in transactions)
             {

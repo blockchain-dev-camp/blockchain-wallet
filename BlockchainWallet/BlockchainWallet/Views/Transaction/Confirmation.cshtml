@@ -1,0 +1,91 @@
+﻿@model TransactionDto
+
+@{
+    ViewData["Title"] = "Confirmation";
+}
+
+
+<div class="row">
+    
+    <div class="col-sm-12 text-center">
+        <h2>Confirmation</h2>
+    </div>
+    
+    @Html.Partial("_ErrorMessage", Model.Message)
+    
+    <div class="col-sm-12 ">
+
+        <br />
+
+        @using (@Html.BeginForm(nameof(TransactionController.Confirmation), nameof(TransactionController).RemoveControllerSuffix(), FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row form-group">
+                <div class="col-sm-3 offset-1 text-right">
+                    @Html.LabelFor(x => x.PrivateKey, "PRIMARY KEY")
+                </div>
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(x => x.PrivateKey, new { @class = "form-control text-right text-danger", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-3 offset-1 text-right">
+                    @Html.LabelFor(x => x.Account, "Your address/account")
+                </div>
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(x => x.Account, new { @class = "form-control text-right", @readonly = "readonly" })
+                </div>
+
+            </div>
+            
+            <div class="row form-group">
+                <div class="col-sm-3 offset-1 text-right">
+                    @Html.LabelFor(x => x.Balance, "Current balance")
+                </div>
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(x => x.Balance, new { @class = "form-control text-right", type = "text", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-3 offset-1 text-right">
+                    @Html.LabelFor(x => x.ReceiverAccount, "Send to address/account")
+                </div>
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(x => x.ReceiverAccount, new { @class = "form-control text-right", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-3 offset-1 text-right">
+                    @Html.LabelFor(x => x.TransferAmount, "Amount")
+                </div>
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(x => x.TransferAmount, new { @class = "form-control text-right", type = "text", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                
+                <div class="col-sm-2 offset-4">
+                    @Html.ActionLink("Cancel", nameof(TransactionController.Index).RemoveControllerSuffix(), nameof(TransactionController).RemoveControllerSuffix(), null, new { @class="btn btn-secondary"})
+                </div>
+                
+                
+                <div class="col-sm-3 text-right">
+                    <input class="btn btn-danger" type="submit" value="Transfer"/>
+                </div>
+                
+                <div class="col-sm-1 text-right">
+                    <span>&ensp;</span>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
+
+

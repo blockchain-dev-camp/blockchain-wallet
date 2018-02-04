@@ -10,3 +10,11 @@
     width: 100%;
     text-align: center;
 }
+
+/* INFO MESSAGES */
+
+.alert-info-msg {
+    font-size: 1.5rem;
+    color: #ffffff;
+    background-color: #ff0000;
+}

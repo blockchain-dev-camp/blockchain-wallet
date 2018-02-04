@@ -10,11 +10,14 @@
     app.url = {};
     app.bool = {};
     app.id = {};
+
     app.id.account = '@Html.IdFor(x => x.Account)';
+    app.id.balance = '@Html.IdFor(x => x.Amount)';
+
     app.bool.shouldCheckBalance = '@Model.ShouldCheckBalance.ToString().ToLower()' === 'true';
     app.url.getBalance =
         '@Url.Action(nameof(BalanceController.BalanceAjax).RemoveControllerSuffix(), nameof(BalanceController).RemoveControllerSuffix())';
-    
+
 
 </script>
 
@@ -40,16 +43,16 @@
                                     <label>Account: </label>
                                 </div>
                                 <div class="col col-sm-9">
-                                    @*<input class="form-control" type="text" name="account" value="9a9f082f37270ff54c5ca4204a0e4da6951fe917" />*@
-                                    @Html.TextBoxFor(x => x.Account, new { id= "account-address", @class= "form-control" })
+                                    @*<input class="form-control" type="text" name="account" id= "account-address", value="9a9f082f37270ff54c5ca4204a0e4da6951fe917" />*@
+                                    @Html.TextBoxFor(x => x.Account, new {  @class= "form-control" })
                                 </div>
                             </div>
                         </div>
                         <div class="col col-sm-6 text-right">
                             <div class="row">
                                 <div class="col col-sm-6 offset-3">
-                                    @*<input class="form-control text-right" id="user-balance" type="text" name="balance" value="" readonly="readonly" />*@
-                                    @Html.TextBoxFor(x => x.Amount, new { id = "user-balance", @class = "form-control text-right", @readonly = "readonly" })
+                                    @*<input class="form-control text-right" id="user-balance"  id = "user-balance",  type="text" name="balance" value="" readonly="readonly" />*@
+                                    @Html.TextBoxFor(x => x.Amount, new {  @class = "form-control text-right", @readonly = "readonly" })
                                 </div>
                                 <div class="col col-sm-3">
                                     <input id="btn-get-balance" class="btn btn-info" type="submit" value="Get Balance"/>
