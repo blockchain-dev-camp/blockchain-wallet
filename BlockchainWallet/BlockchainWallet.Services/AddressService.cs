@@ -7,10 +7,16 @@
     using System.Text;
     using Models.Dto;
     using Org.BouncyCastle.Asn1.Sec;
+    using Org.BouncyCastle.Asn1.X9;
+    using Org.BouncyCastle.Crypto;
+    using Org.BouncyCastle.Crypto.Parameters;
     using Org.BouncyCastle.Math;
+    using Org.BouncyCastle.Security;
 
     public class AddressService
     {
+        private static readonly X9ECParameters Curve = SecNamedCurves.GetByName("secp256k1");
+        private static readonly ECDomainParameters Domain = new ECDomainParameters(Curve.Curve, Curve.G, Curve.N, Curve.H);
         private static readonly Random Rand = new Random();
 
         public AddressDto CreateAddress()
@@ -28,11 +34,12 @@
 
         public AddressDto CreateAddress(string mnemonic)
         {
-            var privateKeyData = this.Sha(mnemonic);
-            var publicKeyData = this.GetPublicKey(privateKeyData);
+            var privateKeyBytes = this.Sha(mnemonic);
+            var publicKeyParameters = this.ToPublicKey(privateKeyBytes);
+            var publicKeyData = publicKeyParameters.Q.GetEncoded();
 
-            var privateKey = this.ByteToHex(privateKeyData);
-            var publicKey = this.ByteToHex(publicKeyData.key) + (publicKeyData.isEven ? "1" : "0");
+            var privateKey = this.ByteToHex(privateKeyBytes);
+            var publicKey = this.ByteToHex(publicKeyData);
 
             var addressRipe = this.HexToRipe(publicKey);
             var address = this.ByteToHex(addressRipe);
@@ -45,19 +52,14 @@
                 Address = address
             };
         }
-
-        public (byte[] key, bool isEven) GetPublicKey(byte[] privateKey)
+        
+        public ECPublicKeyParameters ToPublicKey(byte[] privateKey)
         {
-            BigInteger privKeyInt = new BigInteger(+1, privateKey);
+            BigInteger d = new BigInteger(privateKey);
+            var q = Domain.G.Multiply(d);
 
-            var parameters = SecNamedCurves.GetByName("secp256k1");
-            var qa = parameters.G.Multiply(privKeyInt);
-
-            var xCoord = qa.XCoord.ToBigInteger();
-            byte[] pubKeyX = xCoord.ToByteArrayUnsigned();
-            var isEven = xCoord.Remainder(new BigInteger("2")).IntValue == 0;
-
-            return (pubKeyX, isEven);
+            var publicParams = new ECPublicKeyParameters(q, Domain);
+            return publicParams;
         }
 
         private byte[] Sha(string data)
@@ -80,6 +82,30 @@
             {
                 return ripe.ComputeHash(Encoding.Unicode.GetBytes(data));
             }
+        }
+
+        public byte[] SignData(string msg, string privateKey)
+        {
+            BigInteger privateKeyInt = new BigInteger(privateKey);
+            ECPrivateKeyParameters privateKeyParameters = new ECPrivateKeyParameters(privateKeyInt, Domain);
+            byte[] msgBytes = Encoding.UTF8.GetBytes(msg);
+
+            ISigner signer = SignerUtilities.GetSigner("SHA-256withECDSA");
+            signer.Init(true, privateKeyParameters);
+            signer.BlockUpdate(msgBytes, 0, msgBytes.Length);
+            byte[] sigBytes = signer.GenerateSignature();
+
+            return sigBytes;
+        }
+
+        public bool VerifySignature(ECPublicKeyParameters pubKey, byte[] signature, string msg)
+        {
+            byte[] msgBytes = Encoding.UTF8.GetBytes(msg);
+
+            ISigner signer = SignerUtilities.GetSigner("SHA-256withECDSA");
+            signer.Init(false, pubKey);
+            signer.BlockUpdate(msgBytes, 0, msgBytes.Length);
+            return signer.VerifySignature(signature);
         }
     }
 }

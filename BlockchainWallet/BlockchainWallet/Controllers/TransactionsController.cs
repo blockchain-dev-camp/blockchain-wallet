@@ -84,6 +84,11 @@ namespace BlockchainWallet.Controllers
                 return this.RedirectToAction(nameof(this.Details));
             }
 
+
+            //var message = "blabal";
+            //var signature = addressService.SignData(message, privateKey);
+            //var publicKeyParameters = addressService.ToPublicKey(byte[] privateKey);
+            //var isVerified = addressService.VerifySignature(publicKeyParameters, signature, message);
             //todo create transaction ...
 
 
