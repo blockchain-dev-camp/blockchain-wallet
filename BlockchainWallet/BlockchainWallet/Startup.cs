@@ -28,12 +28,12 @@ namespace BlockchainWallet
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>)); 
             services.AddTransient<IHttpRequestService, HttpRequestService>();
             services.AddTransient<IBalanceCalculator, BalanceCalculator>();
+            services.AddTransient<AddressService, AddressService>();
+            services.AddTransient<MnemonicService, MnemonicService>();
 
             services.AddAutoMapper();
             services.AddMemoryCache();
             services.AddMvc();
-
-            services.AddTransient<AddressService, AddressService>();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

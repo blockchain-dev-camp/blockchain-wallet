@@ -8,12 +8,8 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            @using (Html.BeginForm("Create", "Address", null, FormMethod.Post, true, new { Class = "" }))
-            {
-                @Html.AntiForgeryToken()
-                <span>Don't have a wallet? just </span>
-                <input type="submit" value="Create" class="btn btn-info btn-sm" />
-            }
+            <span>Don't have a wallet? just </span>
+            @Html.ActionLink("Create", "Create", "Address", null,  new { Class = "btn btn-info btn-sm" })
         </div>
         <div class="col-6">
             @using (Html.BeginForm("Recover", "Address", null, FormMethod.Post, true, new { Class = "" }))

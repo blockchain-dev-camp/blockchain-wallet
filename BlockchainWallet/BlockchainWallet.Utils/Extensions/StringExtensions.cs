@@ -10,5 +10,10 @@ namespace BlockchainWallet.Utils.Extensions
 
             return text;
         }
+
+        public static string RemovePointSeparator(this string str)
+        {
+            return str.Replace(".", "").Replace(",", "");
+        }
     }
 }

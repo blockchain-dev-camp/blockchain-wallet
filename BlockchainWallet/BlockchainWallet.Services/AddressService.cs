@@ -1,7 +1,5 @@
 ﻿namespace BlockchainWallet.Services
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
@@ -17,21 +15,7 @@
     {
         private static readonly X9ECParameters Curve = SecNamedCurves.GetByName("secp256k1");
         private static readonly ECDomainParameters Domain = new ECDomainParameters(Curve.Curve, Curve.G, Curve.N, Curve.H);
-        private static readonly Random Rand = new Random();
-
-        public AddressDto CreateAddress()
-        {
-            var words = new List<string>();
-            for (int i = 0; i < MnemonicWords.RequiredWords; i++)
-            {
-                var wordId = Rand.Next(0, MnemonicWords.Words.Count - 1);
-                words.Add(MnemonicWords.Words[wordId]);
-            }
-
-            var mnemonic = string.Join(" ", words);
-            return this.CreateAddress(mnemonic);
-        }
-
+       
         public AddressDto CreateAddress(string mnemonic)
         {
             var privateKeyBytes = this.Sha(mnemonic);
