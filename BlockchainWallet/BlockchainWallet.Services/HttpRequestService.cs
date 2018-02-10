@@ -50,7 +50,7 @@ namespace BlockchainWallet.Services
                     result = this.Send(uri, jsonObject, method, useEncodeBase64);
                 }).Wait();
 
-                return (result, true);
+                return (result, !string.IsNullOrWhiteSpace(result));
             }
             catch (Exception e)
             {

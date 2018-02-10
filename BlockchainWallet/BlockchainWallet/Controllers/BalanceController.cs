@@ -61,13 +61,13 @@ namespace BlockchainWallet.Controllers
             {
                 NodeInfo nodeInfo = new NodeInfo()
                 {
-                    UrlAddress = nodeAddress,
+                    UrlAddress = nodeAddress + nodeData.Endpoints.GetBlocks,
                     MaxBlocksInQuery = nodeData.MaxBlocksInQuery,
                     StartingPage = nodeData.StartingPage
                 };
 
 
-                balance = balanceCalculator.GetBalance(account, nodeInfo.UrlAddress, nodeInfo.StartingPage, nodeInfo.MaxBlocksInQuery);
+                balance += balanceCalculator.GetBalance(account, nodeInfo.UrlAddress, nodeInfo.StartingPage, nodeInfo.MaxBlocksInQuery);
             }
 
             
