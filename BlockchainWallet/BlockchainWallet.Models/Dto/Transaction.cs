@@ -15,7 +15,7 @@ namespace BlockchainWallet.Models.Dto
 
         public string SenderPubKey { get; set; }
 
-        public string[] SenderSignature { get; set; }
+        public string SenderSignature { get; set; }
 
         public string TransactionHash { get; set; }
 

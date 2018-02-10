@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace BlockchainWallet.Services
 {
@@ -17,6 +18,18 @@ namespace BlockchainWallet.Services
         {
             this.httpRequestService = httpRequestService;
         }
+        //protected string NodeData
+        //{
+        //    get
+        //    {
+        //        var builder = new ConfigurationBuilder();
+        //        var config = builder.Build();
+
+        //        var settings = new AppSettings();
+        //        config.GetSection("App").Bind(settings);
+        //        return null;
+        //    }
+        //}
 
         public long GetBalance(string account, string urlNodeAddress, int page, int sizePerPage)
         {
@@ -78,7 +91,9 @@ namespace BlockchainWallet.Services
         {
             nodeAddress = nodeAddress + string.Format(defaultBlockQueryUrl, page, sizePerPage);
 
-            var blocksAsJson = this.httpRequestService.SendRequest(nodeAddress, string.Empty, "GET");
+            var blocksAsJson = string.Empty;
+            var success = false;
+            (blocksAsJson, success) = this.httpRequestService.SendRequest(nodeAddress, string.Empty, "GET");
 
             IEnumerable<Block> blocks = null;
 
@@ -88,7 +103,7 @@ namespace BlockchainWallet.Services
             }
             catch (Exception e)
             {
-                //log error
+                //todo log error
                 Console.WriteLine(e.Message);
                 throw;
             }

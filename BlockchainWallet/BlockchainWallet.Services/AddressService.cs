@@ -60,6 +60,15 @@
             return (pubKeyX, isEven);
         }
 
+        public string GetPublicKey(string privateKey)
+        {
+            var privateAsBytes = Encoding.Unicode.GetBytes(privateKey);
+            var publicKeyData = this.GetPublicKey(privateAsBytes);
+            var publicKey = this.ByteToHex(publicKeyData.key) + (publicKeyData.isEven ? "1" : "0");
+
+            return publicKey;
+        }
+
         private byte[] Sha(string data)
         {
             using (var sha256 = new SHA256Managed())

@@ -8,14 +8,18 @@ using BlockchainWallet.Services;
 using BlockchainWallet.Utils.Globals;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace BlockchainWallet.Controllers
 {
     public class BalanceController : BaseController
     {
-        public BalanceController(IServiceProvider serviceProvider) : base(serviceProvider)
+        private IOptions<NodeData> settings;
+
+        public BalanceController(IOptions<NodeData> settings, IServiceProvider serviceProvider) : base(serviceProvider)
         {
+            this.settings = settings;
         }
 
         [HttpGet]
@@ -49,21 +53,29 @@ namespace BlockchainWallet.Controllers
         [HttpPost]
         public JsonResult BalanceAjax(string account)
         {
-            //todo get from DB default Node parametars like : nodeUrl, starting page, block in on query(sizePerPage)
-            NodeInfo nodeInfo = new NodeInfo()
-            {
-                UrlAddress = "http://178.75.234.192:5555/blocks",
-                MaxBlocksInQuery = 500,
-                StartingPage = 1
-            };
-
             var balanceCalculator = this.ServiceProvider.GetService<IBalanceCalculator>();
+            var nodeData = this.settings.Value;
 
-            var balance = balanceCalculator.GetBalance(account, nodeInfo.UrlAddress, nodeInfo.StartingPage, nodeInfo.MaxBlocksInQuery);
+            var balance = 0l;
+
+            //todo get from DB default Node parametars like : nodeUrl, starting page, block in on query(sizePerPage)
+
+            foreach (var nodeAddress in nodeData.Url)
+            {
+                NodeInfo nodeInfo = new NodeInfo()
+                {
+                    UrlAddress = "http://178.75.234.192:5555/blocks",
+                    MaxBlocksInQuery = 500,
+                    StartingPage = 1
+                };
+
+
+                balance = balanceCalculator.GetBalance(account, nodeInfo.UrlAddress, nodeInfo.StartingPage, nodeInfo.MaxBlocksInQuery);
+            }
+
+            
             var result = new { isSuccess = true, balance = balance };
             return this.Json(result);
         }
-
-
     }
 }

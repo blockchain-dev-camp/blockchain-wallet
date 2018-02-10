@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BlockchainWallet.Data;
 using BlockchainWallet.Data.Repos;
-using BlockchainWallet.Services;
+using BlockchainWallet.Models.Dto;
 
 namespace BlockchainWallet
 {
@@ -23,6 +24,22 @@ namespace BlockchainWallet
         
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.Configure<NodeData>(Configuration.GetSection("NodeData"));
+            services.Configure<NodeData>(options =>
+            {
+                var urls = Configuration.GetSection("NodeData:Url").Get<string[]>();
+                var endPoint = Configuration.GetSection("NodeData:Endpoint").Get<NodeData.Endpoint>();
+                var maxBlocksInQuery = Configuration.GetSection("NodeData:MaxBlocksInQuery").Get<int>();
+                var startingPage = Configuration.GetSection("NodeData:StartingPage").Get<int>();
+
+                options.Url = urls;
+                options.Endpoints = endPoint;
+                options.MaxBlocksInQuery = maxBlocksInQuery;
+                options.StartingPage = startingPage;
+            });
+
+
             services.AddDbContext<BlockchainDbContext>(options => options.UseInMemoryDatabase());
             //options.UseSqlServer(Configuration.GetConnectionString("BlockchainDbConnection")));
 

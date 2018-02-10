@@ -32,7 +32,7 @@ namespace BlockchainWallet.Services
             }
         }
 
-        public string SendRequest(string uri, string data, string method, bool useEncodeBase64 = false)
+        public (string response, bool success) SendRequest(string uri, string data, string method, bool useEncodeBase64 = false)
         {
             var result = string.Empty;
             try
@@ -50,14 +50,14 @@ namespace BlockchainWallet.Services
                     result = this.Send(uri, jsonObject, method, useEncodeBase64);
                 }).Wait();
 
-                return result;
+                return (result, true);
             }
             catch (Exception e)
             {
                 result = e.Message;
             }
 
-            return result;
+            return (result, false);
         }
         
         private string Send(string uri, string data, string method, bool useEncodeBase64)
