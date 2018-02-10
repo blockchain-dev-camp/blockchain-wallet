@@ -2,13 +2,23 @@
     margin: 0;
     height: 100%;
 }
+.navbar {
+    border-bottom: 1px solid #dedede;
+}
+.container {
+    margin: 30px auto;
+}
+#createacc {
+    margin-left: 10px;
+}
 
 .footer {
-    position: fixed;
+    position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
     text-align: center;
+    border-top: 1px solid #dedede;
 }
 
 /* INFO MESSAGES */
