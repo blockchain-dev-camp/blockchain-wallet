@@ -53,7 +53,7 @@ namespace BlockchainWallet.Controllers
             var balanceCalculator = this.ServiceProvider.GetService<IBalanceCalculator>();
             var nodeData = this.settings.Value;
 
-            var balance = 0l;
+            var balance = 0m;
 
             //todo get from DB default Node parametars like : nodeUrl, starting page, block in on query(sizePerPage)
 
@@ -61,9 +61,9 @@ namespace BlockchainWallet.Controllers
             {
                 NodeInfo nodeInfo = new NodeInfo()
                 {
-                    UrlAddress = "http://178.75.234.192:5555/blocks",
-                    MaxBlocksInQuery = 500,
-                    StartingPage = 1
+                    UrlAddress = nodeAddress,
+                    MaxBlocksInQuery = nodeData.MaxBlocksInQuery,
+                    StartingPage = nodeData.StartingPage
                 };
 
 

@@ -16,20 +16,9 @@ namespace BlockchainWallet.Services
         {
             this.httpRequestService = httpRequestService;
         }
-        //protected string NodeData
-        //{
-        //    get
-        //    {
-        //        var builder = new ConfigurationBuilder();
-        //        var config = builder.Build();
+        
 
-        //        var settings = new AppSettings();
-        //        config.GetSection("App").Bind(settings);
-        //        return null;
-        //    }
-        //}
-
-        public long GetBalance(string account, string urlNodeAddress, int page, int sizePerPage)
+        public decimal GetBalance(string account, string urlNodeAddress, int page, int sizePerPage)
         {
             bool isRunning = true;
             Balance balance = new Balance();
@@ -46,7 +35,7 @@ namespace BlockchainWallet.Services
             while (isRunning)
             {
                 // get transactions from blocks and filter those ones that contain current address.
-                var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => (x.From == account || x.To == account) && x.Paid);
+                var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => (x.FromAddress == account || x.ToAddress == account) && x.Paid);
 
                 // calculate balance
                 this.CalculateBalanceByTransactions(neededTransaction, balance, account);
@@ -74,11 +63,11 @@ namespace BlockchainWallet.Services
             
             foreach (var transaction in transactions)
             {
-                if (transaction.To == account)
+                if (transaction.ToAddress == account)
                 {
                     balance.Income += transaction.Value;
                 }
-                else if (transaction.From == account)
+                else if (transaction.FromAddress == account)
                 {
                     balance.Outcome += transaction.Value;
                 }
@@ -93,6 +82,11 @@ namespace BlockchainWallet.Services
             var success = false;
             (blocksAsJson, success) = this.httpRequestService.SendRequest(nodeAddress, string.Empty, "GET");
 
+            if (!success)
+            {
+                return Enumerable.Empty<Block>();
+            }
+
             IEnumerable<Block> blocks = null;
 
             try
@@ -103,7 +97,6 @@ namespace BlockchainWallet.Services
             {
                 //todo log error
                 Console.WriteLine(e.Message);
-                throw;
             }
 
             return blocks;

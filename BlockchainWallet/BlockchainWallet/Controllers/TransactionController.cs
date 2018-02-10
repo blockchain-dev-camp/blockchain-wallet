@@ -115,11 +115,13 @@ namespace BlockchainWallet.Controllers
             {
                 var transaction = new Transaction()
                 {
-                    From = @from,
-                    To = to,
+                    FromAddress = @from,
+                    ToAddress = to,
                     Value = value,
                     SenderSignature = this.Service.ByteToHex(signature),
-                    SenderPubKey = this.Service.GetPublicKey(publicKey)
+                    SenderPubKey = this.Service.GetPublicKey(publicKey),
+                    DateOfSign = DateTime.UtcNow.ToString("o"),
+                    TransactionId = Guid.NewGuid().ToString()
                 };
 
                 var httpRequestService = this.ServiceProvider.GetService<IHttpRequestService>();
@@ -129,8 +131,8 @@ namespace BlockchainWallet.Controllers
                 
                 foreach (var nodeUrl in nodeData.Url)
                 {
-
-                    (response, success) = httpRequestService.SendRequest(nodeUrl, data, "POST");
+                    var fullUrl = nodeUrl + nodeData.Endpoints.PushTransaction;
+                    (response, success) = httpRequestService.SendRequest(fullUrl, data, "POST");
 
                     if (success)
                     {

@@ -14,7 +14,7 @@ namespace BlockchainWallet.Models.Dto
 
         public int Difficulty { get; set; }
 
-        public string PrevBlocHash { get; set; }
+        public string PrevBlockHash { get; set; }
 
         public string MinedBy { get; set; }
 
@@ -27,5 +27,8 @@ namespace BlockchainWallet.Models.Dto
         public string BlockHash { get; set; }
 
         public  IList<Transaction> Transactions { get; set; }
+
+        public string TransactionsHash { get; set; }
+        public ulong Timestamp { get; set; }
     }
 }

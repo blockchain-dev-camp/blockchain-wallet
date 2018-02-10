@@ -4,11 +4,12 @@ namespace BlockchainWallet.Models.Dto
 {
     public class Transaction
     {
-        public string From { get; set; }
+        public string TransactionId { get; set; }
+        public string FromAddress { get; set; }
 
-        public string To { get; set; }
+        public string ToAddress { get; set; }
 
-        public long Value { get; set; }
+        public decimal Value { get; set; }
 
         public string SenderPubKey { get; set; }
 
@@ -18,8 +19,27 @@ namespace BlockchainWallet.Models.Dto
 
         public bool Paid { get; set; }
 
-        public DateTime DateReceived { get; set; }
+        public string DateReceived { get; set; }
+
+        public string DateOfSign { get; set; }
 
         public long MinedInBlockIndex { get; set; }
+
+        public decimal Fee { get; set; }
+
+        public DateTime GetDateReceived()
+        {
+            return DateTime.UtcNow;
+        }
+
+        public DateTime GetDateOfSign()
+        {
+            
+            var a = DateTime.Now.ToString("o");
+
+            return  DateTime.UtcNow;
+        }
+
+
     }
 }

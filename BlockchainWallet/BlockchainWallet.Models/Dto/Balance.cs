@@ -2,9 +2,9 @@
 {
     public class Balance
     {
-        public long Income { get; set; }
-        public long Outcome { get; set; }
+        public decimal Income { get; set; }
+        public decimal Outcome { get; set; }
 
-        public long Current => this.Income - this.Outcome;
+        public decimal Current => this.Income - this.Outcome;
     }
 }

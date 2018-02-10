@@ -2,6 +2,6 @@
 {
     public interface IBalanceCalculator
     {
-        long GetBalance(string account, string urlNodeAddress, int page, int sizePerPage);
+        decimal GetBalance(string account, string urlNodeAddress, int page, int sizePerPage);
     }
 }
