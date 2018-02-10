@@ -15,7 +15,7 @@
     {
         private static readonly X9ECParameters Curve = SecNamedCurves.GetByName("secp256k1");
         private static readonly ECDomainParameters Domain = new ECDomainParameters(Curve.Curve, Curve.G, Curve.N, Curve.H);
-       
+
         public AddressDto CreateAddress(string mnemonic)
         {
             var privateKeyBytes = this.Sha(mnemonic);
@@ -36,7 +36,18 @@
                 Address = address
             };
         }
-        
+
+        public byte[] GetBytes(string data)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            return bytes;
+        }
+
+        public ECPublicKeyParameters ToPublicKey(string privateKey)
+        {
+            return this.ToPublicKey(this.GetBytes(privateKey));
+        }
+
         public ECPublicKeyParameters ToPublicKey(byte[] privateKey)
         {
             BigInteger d = new BigInteger(privateKey);
@@ -46,10 +57,8 @@
             return publicParams;
         }
 
-        public string GetPublicKey(string privateKey)
+        public string GetPublicKey(ECPublicKeyParameters publicKeyParameters)
         {
-            var privateAsBytes = Encoding.Unicode.GetBytes(privateKey);
-            var publicKeyParameters = this.ToPublicKey(privateAsBytes);
             var publicKeyData = publicKeyParameters.Q.GetEncoded();
             var publicKey = this.ByteToHex(publicKeyData);
 
@@ -65,7 +74,7 @@
             }
         }
 
-        private string ByteToHex(byte[] data)
+        public string ByteToHex(byte[] data)
         {
             return string.Join("", data.Select(h => h.ToString("x2")));
         }
@@ -79,6 +88,11 @@
         }
 
         public byte[] SignData(string msg, string privateKey)
+        {
+            return this.SignData(msg, this.GetBytes(privateKey));
+        }
+
+        public byte[] SignData(string msg, byte[] privateKey)
         {
             BigInteger privateKeyInt = new BigInteger(privateKey);
             ECPrivateKeyParameters privateKeyParameters = new ECPrivateKeyParameters(privateKeyInt, Domain);
