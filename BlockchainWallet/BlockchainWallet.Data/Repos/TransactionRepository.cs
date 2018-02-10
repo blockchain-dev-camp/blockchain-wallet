@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using BlockchainWallet.Models;
-
-using System.Text;
-using BlockchainWallet.Models.ViewModels;
+﻿using BlockchainWallet.Models.ViewModels;
 
 namespace BlockchainWallet.Data.Repos
 {

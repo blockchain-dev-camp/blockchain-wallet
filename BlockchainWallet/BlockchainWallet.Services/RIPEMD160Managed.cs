@@ -12,9 +12,7 @@
 //   https://homes.esat.kuleuven.be/~bosselae/ripemd160.html) the legal license
 //   status of this code is not clear. 
 
-using System;
 using System.Linq;
-using System.Text;
 
 namespace System.Security.Cryptography
 {
@@ -389,7 +387,7 @@ namespace System.Security.Cryptography
 
         public RIPEMD160Managed()
         {
-            Initialize();
+            this.Initialize();
         }
 
         protected override void HashCore (byte[] array, int ibStart, int cbSize)

@@ -1,93 +1,119 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using BlockchainWallet.Models.Dto;
+using BlockchainWallet.Utils.Globals;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlockchainWallet.Controllers
 {
-    public class TransactionsController : Controller
+    using System;
+
+    [Route("Transaction")]
+    public class TransactionsController : BaseController
     {
-        // GET: Transactions
-        public ActionResult Index()
+        public TransactionsController(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            return View();
         }
 
-        // GET: Transactions/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //[HttpGet]
+        //[Route("")]
+        //public IActionResult Index()
+        //{
+        //    TransactionDto dto = this.GetDtoFromTempData<TransactionDto>(TempDataKeys.TransactionDto);
+            
+        //    if (dto == null)
+        //    {
+        //        dto = new TransactionDto();
+        //    }
 
-        // GET: Transactions/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //    return this.View(dto);
+        //}
 
-        // POST: Transactions/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Route("")]
+        //public IActionResult Index(TransactionDto transaction)
+        //{
+        //    if (!this.ModelState.IsValid)
+        //    {
+        //        //todo show exact error msg/msgs
+        //        transaction.Message = "Invalid Data !!!";
+        //        this.AddDtoToTempData(TempDataKeys.TransactionDto, transaction);
+        //        return this.RedirectToAction(nameof(this.Index));
+        //    }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //    this.AddDtoToTempData(TempDataKeys.TransactionDto, transaction);
 
-        // GET: Transactions/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //    return this.RedirectToAction(nameof(this.Confirmation));
+        //}
 
-        // POST: Transactions/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //[HttpGet]
+        //[Route("Confirmation")]
+        //public IActionResult Confirmation()
+        //{
+        //    TransactionDto dto = this.GetDtoFromTempData<TransactionDto>(TempDataKeys.TransactionDto);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //    if (dto == null)
+        //    {
+        //        //todo show exact error msg/msgs
+        //        dto = new TransactionDto();
+        //        dto.Message = "Missing Data ! Something goes wrong!";
+        //        this.AddDtoToTempData(TempDataKeys.TransactionDto, dto);
+        //        return this.RedirectToAction(nameof(this.Index));
+        //    }
 
-        // GET: Transactions/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //    this.AddDtoToTempData(TempDataKeys.TransactionDto, dto);
 
-        // POST: Transactions/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //    return this.View(dto);
+        //}
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Route("Confirmation")]
+        //public IActionResult Confirmation(TransactionDto dto)
+        //{
+        //    Result result = new Result();
+
+        //    var lastValidTransactionState = this.GetDtoFromTempData<TransactionDto>(TempDataKeys.TransactionDto);
+
+        //    var areEquals = dto.Equals(lastValidTransactionState);
+
+        //    if (!areEquals)
+        //    {
+        //        result.Messages.Add("Someone try change data with invalid!");
+
+        //        this.AddDtoToTempData(TempDataKeys.ResultDto, result);
+        //        return this.RedirectToAction(nameof(this.Details));
+        //    }
+
+
+        //    //var message = "blabal";
+        //    //var signature = addressService.SignData(message, privateKey);
+        //    //var publicKeyParameters = addressService.ToPublicKey(byte[] privateKey);
+        //    //var isVerified = addressService.VerifySignature(publicKeyParameters, signature, message);
+        //    //todo create transaction ...
+
+
+        //    var receeivedOn = DateTime.Now;
+        //    var transactionHash = Guid.NewGuid().ToString();
+
+        //    result.IsSuccess = true;
+        //    result.Messages.Add($"Successfully make transfer!");
+        //    result.Messages.Add($"Amount: {dto.TransferAmount} coins.");
+        //    result.Messages.Add($"To: {dto.ReceiverAccount}");
+        //    result.Messages.Add($"Received on: {receeivedOn}");
+        //    result.Messages.Add($"Transaction hash: {transactionHash}");
+
+        //    this.AddDtoToTempData(TempDataKeys.ResultDto, result);
+
+        //    return this.RedirectToAction(nameof(this.Details));
+        //}
+
+        //[HttpGet]
+        //[Route("Details")]
+        //public IActionResult Details()
+        //{
+        //    var result = this.GetDtoFromTempData<Result>(TempDataKeys.ResultDto);
+
+        //    return this.View(result);
+        //}
     }
 }

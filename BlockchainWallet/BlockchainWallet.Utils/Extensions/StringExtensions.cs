@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace BlockchainWallet.Utils.Extensions
 {
@@ -12,6 +9,11 @@ namespace BlockchainWallet.Utils.Extensions
             text = Regex.Replace(text, "controller", "", RegexOptions.IgnoreCase);
 
             return text;
+        }
+
+        public static string RemovePointSeparator(this string str)
+        {
+            return str.Replace(".", "").Replace(",", "");
         }
     }
 }

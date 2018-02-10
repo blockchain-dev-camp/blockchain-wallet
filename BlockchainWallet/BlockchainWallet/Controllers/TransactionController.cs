@@ -214,7 +214,7 @@ namespace BlockchainWallet.Controllers
             return this.View(result);
         }
 
-        public string Test(string data, string privateKey)
+        private string Test(string data, string privateKey)
         {
             
 

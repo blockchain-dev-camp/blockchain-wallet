@@ -6,7 +6,7 @@
 
 namespace System.Security.Cryptography
 {
-    public abstract class RIPEMD160 : System.Security.Cryptography.HashAlgorithm
+    public abstract class RIPEMD160 : HashAlgorithm
     {
         public RIPEMD160()
         {

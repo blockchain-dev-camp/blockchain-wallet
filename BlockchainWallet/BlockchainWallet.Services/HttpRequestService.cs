@@ -104,7 +104,7 @@ namespace BlockchainWallet.Services
 
             try
             {
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "GET";
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BlockchainWallet.Models.Domain;
 using BlockchainWallet.Models.Dto;
 using BlockchainWallet.Services;
@@ -37,7 +34,7 @@ namespace BlockchainWallet.Controllers
                 dto = JsonConvert.DeserializeObject<BalanceDto>(dtoAsStr);
             }
 
-            return View(dto);
+            return this.View(dto);
         }
 
         [HttpPost]

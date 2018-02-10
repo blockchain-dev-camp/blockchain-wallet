@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BlockchainWallet.Utils.Globals
+﻿namespace BlockchainWallet.Utils.Globals
 {
     public class TempDataKeys
     {

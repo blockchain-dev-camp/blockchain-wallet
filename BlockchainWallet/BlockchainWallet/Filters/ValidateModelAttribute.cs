@@ -22,7 +22,7 @@
             if (context.ModelState.IsValid == false)
             {
                 var result = new ViewResult();
-                if (!string.IsNullOrEmpty(this._view))
+                if (!string.IsNullOrEmpty(_view))
                 {
                     result.ViewName = _view;
                 }
