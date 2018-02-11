@@ -1,0 +1,97 @@
+﻿@model HistoryDto
+@{
+    ViewData["Title"] = "History";
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Index" asp-controller="History" method="POST">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col col-sm-12 text-center">
+                    <h3>Blockchain Wallet - Online</h3>
+                </div>
+
+                @if (string.IsNullOrEmpty(Model.Account))
+                {
+                    <div class="col col-sm-6">
+                        <div class="row">
+                            <div class="col col-sm-2">
+                                <label>Account: </label>
+                            </div>
+                            <div class="col col-sm-9">
+                                @*<input class="form-control" type="text" name="account" id= "account-address", value="9a9f082f37270ff54c5ca4204a0e4da6951fe917" />*@
+                                @Html.TextBoxFor(x => x.Account, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-3">
+                        <input id="btn-get-balance" class="btn btn-info" type="submit" value="Get History" />
+                    </div>
+                }
+                else
+                {
+                    <div class="col col-sm-12">
+                        <br />
+                        <div class="row">
+                            <div class="col col-sm-6 text-right">
+                                <div class="row">
+                                    <div class="col col-sm-12 offset-3">
+                                        @if (Model.Transactions.Count == 0)
+                                        {
+                                            <p>@Model.Description</p>
+                                        }
+                                        else
+                                        {
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <td>TransactionId</td>
+                                                        <td>FromAddress</td>
+                                                        <td>ToAddress</td>
+                                                        <td>Value</td>
+                                                        <td>Paid</td>
+                                                        <td>DateReceived</td>
+                                                        <td>Fee</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                @foreach (var tran in Model.Transactions)
+                                                {
+                                                    <tr>
+                                                        <td>@tran.TransactionId</td>
+                                                        <td>@tran.FromAddress</td>
+                                                        <td>@tran.ToAddress</td>
+                                                        <td>@tran.Value</td>
+                                                        <td>@tran.Paid</td>
+                                                        <td>@tran.DateReceived</td>
+                                                        <td>@tran.Fee</td>
+                                                    </tr>
+                                                }
+
+                                                </tbody>
+                                            </table>
+                                        }
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-md-12 text-center loading-logo" style="display: none">
+        <span>Loading ...</span>
+        <br />
+        <br />
+        @Html.Partial("_LoadingLogo")
+    </div>
+</div>

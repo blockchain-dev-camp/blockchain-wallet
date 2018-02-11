@@ -51,9 +51,9 @@ namespace BlockchainWallet.Models.Dto
             {
                 date.AddMilliseconds(long.Parse(this.DateReceived));
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                
+                // Log in file exception
             }
 
             return date;

@@ -25,7 +25,7 @@ namespace BlockchainWallet.Services
                     this.Send(uri, jsonObject, method, useEncodeBase64);
                 });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // error handler - log error
                 //var additionalInfo = $"Url: {uri}; Data: {data}";
@@ -89,7 +89,7 @@ namespace BlockchainWallet.Services
                     result = client.UploadString(new Uri(uri), method, data);
 
                 }
-                catch (WebException e)
+                catch (WebException)
                 {
                     // error handler - log error
                     //var additionalInfo = $"Url: {uri}; Data: {data}";
