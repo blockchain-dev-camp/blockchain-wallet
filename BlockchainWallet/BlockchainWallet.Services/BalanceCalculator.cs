@@ -72,8 +72,6 @@ namespace BlockchainWallet.Services
                 {
                     balance.Outcome += transaction.Value;
                 }
-
-                var a = transaction.GetDateOfSign();
             }
         }
 

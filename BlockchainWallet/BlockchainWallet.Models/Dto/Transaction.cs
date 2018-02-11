@@ -23,7 +23,7 @@ namespace BlockchainWallet.Models.Dto
 
         [JsonProperty("senderSignature")]
         public string SenderSignature { get; set; }
-
+                       
         [JsonProperty("transactionHash")]
         public string TransactionHash { get; set; }
 
@@ -41,17 +41,22 @@ namespace BlockchainWallet.Models.Dto
 
         [JsonProperty("fee")]
         public decimal Fee { get; set; }
+        
 
         public DateTime GetDateReceived()
         {
-            return DateTime.UtcNow;
-        }
+            var date = new DateTime(1970, 1, 1);
 
-        public DateTime GetDateOfSign()
-        {
-            var a = DateTime.Now.ToString("o");
+            try
+            {
+                date.AddMilliseconds(long.Parse(this.DateReceived));
+            }
+            catch (Exception e)
+            {
+                
+            }
 
-            return  DateTime.UtcNow;
+            return date;
         }
 
 

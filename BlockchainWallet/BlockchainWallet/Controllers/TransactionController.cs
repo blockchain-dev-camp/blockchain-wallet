@@ -140,19 +140,19 @@ namespace BlockchainWallet.Controllers
                     }
                 }
             }
-
             
-
-            var receeivedOn = DateTime.Now;
-            var transactionHash = Guid.NewGuid().ToString();
-
             result.IsSuccess = success;
             if (success)
             {
+                var responseAsTransaction = JsonConvert.DeserializeObject<Transaction>(response);
+
+                var receivedOn = responseAsTransaction.DateReceived;
+                var transactionHash = responseAsTransaction.TransactionHash;
+
                 result.Messages.Add($"Successfully make transfer!");
                 result.Messages.Add($"Amount: {dto.TransferAmount} coins.");
                 result.Messages.Add($"To: {dto.ReceiverAccount}");
-                result.Messages.Add($"Received on: {receeivedOn}");
+                result.Messages.Add($"Received on: {receivedOn}");
                 result.Messages.Add($"Transaction hash: {transactionHash}");
             }
             else
