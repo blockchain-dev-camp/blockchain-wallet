@@ -13,6 +13,9 @@ namespace BlockchainWallet.Controllers
 {
     public class FaucetController : BaseController
     {
+        private const string FaucetPrivateKey = "57da87852534fc39cec621550a0b701e18132b92f924172ace529490ebdafb04";
+        private const string FaucetAddress = "44a161dd6354d38eef62e571888a2d8c0d81a73c";
+
         private IOptions<NodeData> nodeSettings;
 
         public FaucetController(IOptions<NodeData> nodeSettings, IServiceProvider serviceProvider) : base(serviceProvider)
@@ -50,8 +53,8 @@ namespace BlockchainWallet.Controllers
             {
                 TransferAmount = transferAmount,
                 ReceiverAccount = dto.ToAddress,
-                PrivateKey = "57da87852534fc39cec621550a0b701e18132b92f924172ace529490ebdafb04",
-                Account = "44a161dd6354d38eef62e571888a2d8c0d81a73c"
+                PrivateKey = FaucetPrivateKey,
+                Account = FaucetAddress
             };
 
             (response, success) = transactionManager.MakeTransaction(addressService, httpRequestService, nodeData, transaction);
