@@ -9,8 +9,7 @@ window.addEventListener('load', function () {
     }
     
     function getBalance() {
-        // 9a9f082f37270ff54c5ca4204a0e4da6951fe917
-
+        
         app.startLogo();
 
         let userAccount = $('#' + app.id.account).val();
@@ -18,16 +17,18 @@ window.addEventListener('load', function () {
         let data = {
             account: userAccount
         }
-
-        //console.log(data);
         
         app.makeRequest(app.url.getBalance, data, 'POST')
             .then(res => {
 
                 if (res.isSuccess) {
-                    console.log('success');
-                    $('#' + app.id.balance).val(res.balance);
-                    //$('#' + app.id.balance).val(56);
+
+                    //let tempBalance = 56;
+                    let tempBalance = res.balance;
+
+                    $('#' + app.id.balance).val(tempBalance);
+
+                    canContinue(tempBalance);
                 } else {
                     console.log('error !');
                 }
@@ -39,5 +40,18 @@ window.addEventListener('load', function () {
                 app.stopLogo();
                 console.log(err);
             });
+
+        function canContinue(balance) {
+            
+            if (balance && Number(balance) > 0) {
+                $('#balance-info-msg').removeClass('text-danger');
+                $('#balance-info-msg').hide();
+                $('#btn-continue-trans').show();
+            } else {
+                $('#balance-info-msg').addClass('text-danger');
+                $('#balance-info-msg').css('font-size', '1.5rem');
+                $('#balance-info-msg').text('No funds available!');
+            }
+        }
     }
 });

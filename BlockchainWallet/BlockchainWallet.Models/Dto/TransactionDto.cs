@@ -4,20 +4,23 @@ namespace BlockchainWallet.Models.Dto
 {
     public class TransactionDto
     {
-        //[MinLength(1), MaxLength(2)]
+        [Required]
+        [MinLength(64), MaxLength(64)]
         public string PrivateKey { get; set; }
 
-        //[MinLength(1), MaxLength(2)]
+        [Required]
+        [MinLength(40), MaxLength(100)]
         public string Account { get; set; }
 
-        [Range(0, double.MaxValue)]
-        public long Balance { get; set; }
+        [Range(0.0001, double.MaxValue)]
+        public decimal Balance { get; set; }
 
-        //[MinLength(1), MaxLength(2)]
+        [Required]
+        [MinLength(40), MaxLength(100)]
         public string ReceiverAccount { get; set; }
 
-        [Range(0, double.MaxValue)]
-        public long TransferAmount { get; set; }
+        [Range(0.0001, double.MaxValue)]
+        public decimal TransferAmount { get; set; }
 
         public string Message { get; set; }
 

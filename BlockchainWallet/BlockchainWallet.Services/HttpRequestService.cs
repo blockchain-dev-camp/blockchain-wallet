@@ -71,6 +71,7 @@ namespace BlockchainWallet.Services
 
             using (var client = new WebClient())
             {
+                
                 try
                 {
                     if (useEncodeBase64)

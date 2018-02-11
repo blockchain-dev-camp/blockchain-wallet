@@ -59,7 +59,11 @@ body {
     cursor: -webkit-grab;
 }
 
-    .slider-control:active {
-        cursor: grabbing;
-        cursor: -webkit-grabbing;
-    }
+.slider-control:active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.hide-me {
+    display: none;
+}

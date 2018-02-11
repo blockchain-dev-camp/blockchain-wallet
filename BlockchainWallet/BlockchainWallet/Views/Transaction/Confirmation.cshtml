@@ -22,52 +22,52 @@
             @Html.AntiForgeryToken()
 
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.PrivateKey, "PRIMARY KEY")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.PrivateKey, new { @class = "form-control text-right text-danger", @readonly = "readonly" })
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.Account, "Your address/account")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.Account, new { @class = "form-control text-right", @readonly = "readonly" })
                 </div>
 
             </div>
             
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.Balance, "Current balance")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.Balance, new { @class = "form-control text-right", type = "text", @readonly = "readonly" })
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.ReceiverAccount, "Send to address/account")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.ReceiverAccount, new { @class = "form-control text-right", @readonly = "readonly" })
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.TransferAmount, "Amount")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.TransferAmount, new { @class = "form-control text-right", type = "text", @readonly = "readonly" })
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row form-group transaction-confirmation-controls">
                 
                 <div class="col-sm-2 offset-4">
                     @Html.ActionLink("Cancel", nameof(TransactionController.Index).RemoveControllerSuffix(), nameof(TransactionController).RemoveControllerSuffix(), null, new { @class="btn btn-secondary"})
@@ -87,5 +87,7 @@
 
     </div>
 </div>
+
+<script src="~/js/confirmTransaction.js"></script>
 
 

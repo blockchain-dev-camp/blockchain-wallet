@@ -1,0 +1,62 @@
+﻿@model FaucetDto
+
+@{
+    ViewData["Title"] = "GetCoins";
+}
+
+<style>
+    .received-coins {
+        color: white;
+        background-color: green;
+        font-size: 1.5rem;
+    }
+</style>
+
+<div class="row">
+    
+    <div class="col-sm-12">
+        <h2>Get some coins ;)</h2>
+        <br />
+        <br />
+        <br/>
+    </div>
+    
+    @if (Model != null && Model.Amount > 0)
+    {
+        <div class="col-sm-12">
+            <h3>@Model.Amount coins were successfully transfer to <span class="received-coins">@Model.ToAddress</span></h3>
+        </div>
+    }
+    
+    
+    
+    <div class="col-sm-12">
+        @using (Html.BeginForm(
+            nameof(FaucetController.GetCoins).RemoveControllerSuffix(),
+            nameof(FaucetController).RemoveControllerSuffix(),
+            FormMethod.Post))
+        {
+            <div class="row text-left">
+                
+                <div class="col-sm-2 offset-2">
+                    @Html.LabelFor(x => x.ToAddress, "Address/account")
+                </div>
+                
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(x => x.ToAddress, new { @class = "form-control" })
+                </div>
+
+            </div>
+
+            <div class="row text-left">
+
+
+                <div class="col-sm-8 offset-4">
+                    <br/>
+                    <input class="btn btn-success" type="submit" value="Get coins"/>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

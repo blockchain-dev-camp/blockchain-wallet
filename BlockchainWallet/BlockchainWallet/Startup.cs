@@ -48,6 +48,7 @@ namespace BlockchainWallet
             services.AddTransient<IBalanceCalculator, BalanceCalculator>();
             services.AddTransient<AddressService, AddressService>();
             services.AddTransient<MnemonicService, MnemonicService>();
+            services.AddTransient<ITransactionManager, TransactionManager>();
 
             services.AddAutoMapper();
             services.AddMemoryCache();

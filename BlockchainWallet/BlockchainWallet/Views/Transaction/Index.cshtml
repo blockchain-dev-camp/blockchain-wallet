@@ -34,23 +34,27 @@
         {
             @Html.AntiForgeryToken()
 
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.PrivateKey, "PRIMARY KEY")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.PrivateKey, new { @class = "form-control text-right text-danger" })
+                    <span asp-validation-for="PrivateKey" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.Account, "Enter your address/account")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.Account, new { @class= "form-control text-right" })
+                    <span asp-validation-for="Account" class="text-danger"></span>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <button id="btn-tx-get-balance" class="btn btn-secondary" type="button">Get Balance</button>
                 </div>
             </div>
@@ -58,60 +62,49 @@
             @Html.Partial("_LoadingLogo")
 
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.Balance, "Current balance")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.Balance, new { @class = "form-control text-right", type="text", @readonly= "readonly" })
-                    @*<input id="current-balance" class="form-control text-right" type="text" value="34" readonly="readonly"/>*@
+                    <span asp-validation-for="Balance" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.ReceiverAccount, "Send to address/account")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.ReceiverAccount, new { @class = "form-control text-right" })
+                    <span asp-validation-for="ReceiverAccount" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-sm-3 offset-1 text-right">
+                <div class="col-sm-3 text-right">
                     @Html.LabelFor(x => x.TransferAmount, "Amount")
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     @Html.TextBoxFor(x => x.TransferAmount, new { @class = "form-control text-right", type = "text" })
+                    <span asp-validation-for="TransferAmount" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-sm-5 offset-4">
-                    <input class="btn btn-info" type="submit" value="Continue" />
+                
+                <div id="balance-info-msg" class="col-sm-12 text-center text-info">
+                    Get balance before continue...
+                </div>
+
+                <div id="btn-continue-trans" class="col-sm-5 offset-4 hide-me">
+                    <input class="btn btn-info" type="submit" value="Continue"/>
                 </div>
             </div>
         }
  
     </div>
 
-    @*<div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-9"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-9"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-9"></div>
-        </div>
-            <div>
-        TODO : Sent transaction
-    </div>
-
-    *@
-    
 </div>
 
 <script type="text/javascript" src="~/js/getBalance.js"></script>

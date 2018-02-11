@@ -18,7 +18,7 @@ namespace BlockchainWallet.Services
         }
         
 
-        public decimal GetBalance(string account, string urlNodeAddress, int page, int sizePerPage)
+        public (decimal balance, bool success) GetBalance(string account, string urlNodeAddress, int page, int sizePerPage)
         {
             bool isRunning = true;
             Balance balance = new Balance();
@@ -26,10 +26,10 @@ namespace BlockchainWallet.Services
             // get blocks from Node
             var blocks = this.GetBlocks(urlNodeAddress, page++, sizePerPage);
 
-            if (blocks == null)
+            if (blocks == null || !blocks.Any())
             {
                 //todo log error
-                return balance.Current;
+                return (balance.Current, false);
             }
 
             while (isRunning)
@@ -52,7 +52,7 @@ namespace BlockchainWallet.Services
                 }
             }
 
-            return balance.Current;
+            return (balance.Current, true);
         }
 
         private void CalculateBalanceByTransactions(IEnumerable<Transaction> transactions, Balance balance, string account)

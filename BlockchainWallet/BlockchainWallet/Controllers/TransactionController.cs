@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 namespace BlockchainWallet.Controllers
 {
     using System;
+    using System.Linq;
 
     [Route("Transaction")]
     public class TransactionController : BaseController
@@ -45,8 +46,9 @@ namespace BlockchainWallet.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //todo show exact error msg/msgs
-                transaction.Message = "Invalid Data !!!";
+                //todo show exact error msg/msgs 
+                var allErrors = ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage));
+                transaction.Message = string.Join(". ", allErrors);
                 this.AddDtoToTempData(TempDataKeys.TransactionDto, transaction);
                 return this.RedirectToAction(nameof(this.Index));
             }
@@ -95,52 +97,17 @@ namespace BlockchainWallet.Controllers
                 return this.RedirectToAction(nameof(this.Details));
             }
             
-            this.Service = this.ServiceProvider.GetService<AddressService>();
-
-            var publicKey = this.Service.ToPublicKey(dto.PrivateKey);
-
-            var from = dto.Account;
-            var to = dto.ReceiverAccount;
-            var value = dto.TransferAmount;
-            var privateKey = dto.PrivateKey;
-
-            var message = from + to + value;
-            var signature = this.Service.SignData(message, privateKey);
-            var isSignValid = this.Service.VerifySignature(publicKey, signature, message);
+            var addressService = this.ServiceProvider.GetService<AddressService>();
+            var httpRequestService = this.ServiceProvider.GetService<IHttpRequestService>();
+            var nodeData = this.nodeSettings.Value;
+            var transactionManager = this.ServiceProvider.GetService<ITransactionManager>();
 
             var response = string.Empty;
             var success = false;
 
-            if (isSignValid)
-            {
-                var transaction = new Transaction()
-                {
-                    FromAddress = @from,
-                    ToAddress = to,
-                    Value = value,
-                    SenderSignature = this.Service.ByteToHex(signature),
-                    SenderPubKey = this.Service.GetPublicKey(publicKey),
-                    DateOfSign = DateTime.UtcNow.ToString("o"),
-                    TransactionId = Guid.NewGuid().ToString()
-                };
+            (response, success) = transactionManager.MakeTransaction(addressService, httpRequestService, nodeData, dto);
 
-                var httpRequestService = this.ServiceProvider.GetService<IHttpRequestService>();
-                var data = JsonConvert.SerializeObject(transaction);
 
-                var nodeData = this.nodeSettings.Value;
-                
-                foreach (var nodeUrl in nodeData.Url)
-                {
-                    var fullUrl = nodeUrl + nodeData.Endpoints.PushTransaction;
-                    (response, success) = httpRequestService.SendRequest(fullUrl, data, "POST");
-
-                    if (success)
-                    {
-                        break;                        
-                    }
-                }
-            }
-            
             result.IsSuccess = success;
             if (success)
             {
@@ -153,12 +120,11 @@ namespace BlockchainWallet.Controllers
                 result.Messages.Add($"Amount: {dto.TransferAmount} coins.");
                 result.Messages.Add($"To: {dto.ReceiverAccount}");
                 result.Messages.Add($"Received on: {receivedOn}");
-                result.Messages.Add($"Transaction hash: {transactionHash}");
+                result.Messages.Add($"Transaction hash/id: {transactionHash}");
             }
             else
             {
-                result.Messages.Add($"Somethings get wrong!");
-                result.Messages.Add($"Cannot make transfer!");
+                result.Messages.Add($"Transaction failed! Somethings get wrong!");
             }
             
             this.AddDtoToTempData(TempDataKeys.ResultDto, result);
