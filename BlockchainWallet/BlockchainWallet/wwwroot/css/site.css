@@ -16,8 +16,6 @@
 
 .footer {
     position: absolute;
-    left: 0;
-    bottom: 0;
     width: 100%;
     text-align: center;
     border-top: 1px solid #dedede;
@@ -44,15 +42,16 @@ body {
     position: absolute;
     margin: 8px;
     padding: 1px 5px 5px 5px;
+    background: #e6e6fa;
     background: rgba(230, 230, 250, 0.7);
     opacity: 0.5;
     border-radius: 3px;
     z-index: 1000;
 }
 
-    #controls:hover {
-        opacity: 1;
-    }
+#controls:hover {
+    opacity: 1;
+}
 
 .slider-control {
     position: relative;
@@ -68,4 +67,24 @@ body {
 
 .hide-me {
     display: none;
+}
+
+.in {
+    background-color: #009d39;
+    background-color: rgba(0, 157, 57, 1);
+}
+
+.out {
+    background-color: #ff8b00;
+    background-color: rgba(255, 139, 0, 1);
+}
+
+.in.pending {
+    background-color: #009d82;
+    background-color: rgba(0, 157, 57, 0.5);
+}
+
+.out.pending {
+    background-color: #ffae00;
+    background-color: rgba(255, 139, 0, 0.5);
 }

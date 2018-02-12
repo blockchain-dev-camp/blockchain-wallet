@@ -43,7 +43,7 @@
                                         else
                                         {
                                             <table class="table-bordered table" align="center">
-                                                <thead>
+                                                <thead class="thead-default">
                                                     <tr>
                                                         <th>TransactionId</th>
                                                         <th>FromAddress</th>
@@ -58,8 +58,19 @@
 
                                                 @foreach (var tran in Model.Transactions)
                                                 {
+                                                    string className = "in";
+                                                    if (tran.FromAddress == Model.Account)
+                                                    {
+                                                        className = "out";
+                                                    }
+
+                                                    if (!tran.Paid)
+                                                    {
+                                                        className += " pending";
+                                                    }
+
                                                     var transDT = new DateTime(1970, 1, 1, 0, 0, 0).AddMilliseconds(long.Parse(tran.DateReceived));
-                                                    <tr>
+                                                    <tr class="@className">
                                                         <td>@tran.TransactionId</td>
                                                         <td>@tran.FromAddress</td>
                                                         <td>@tran.ToAddress</td>
