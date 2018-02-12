@@ -36,5 +36,10 @@ namespace BlockchainWallet.Models.Dto
 
             return isPrKeyValid && isAccountValid && isBalanceVAlid && isReceiverValid && isTransferAmountValid;
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

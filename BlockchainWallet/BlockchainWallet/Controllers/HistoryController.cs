@@ -34,7 +34,7 @@ namespace BlockchainWallet.Controllers
         {
             HistoryDto history = new HistoryDto(account);
             var historyExtranctor = this.ServiceProvider.GetService<IHistoryExtractor>();
-            var nodeData = this.Settings.Value;
+            NodeData nodeData = this.Settings.Value;
 
             foreach (var nodeAddress in nodeData.Url)
             {
@@ -59,8 +59,21 @@ namespace BlockchainWallet.Controllers
                             history.Transactions.Add(tran);
                         }
                     }
-;
-                    break;
+                }
+
+                nodeInfo.UrlAddress = nodeAddress + nodeData.Endpoints.GetPendingTransactions;
+
+                (transactions, success) = historyExtranctor.GetPendingTransactions(account, nodeInfo.UrlAddress);
+
+                if (success)
+                {
+                    foreach (var tran in transactions)
+                    {
+                        if (!history.Transactions.Contains(tran))
+                        {
+                            history.Transactions.Add(tran);
+                        }
+                    }
                 }
             }
 

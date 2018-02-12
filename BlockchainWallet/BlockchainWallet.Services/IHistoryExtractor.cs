@@ -6,5 +6,7 @@
     public interface IHistoryExtractor
     {
         (List<Transaction> transactions, bool success) GetTransactions(string account, string urlNodeAddress, int page, int sizePerPage);
+
+        (List<Transaction> transactions, bool success) GetPendingTransactions(string account, string urlNodeAddress);
     }
 }

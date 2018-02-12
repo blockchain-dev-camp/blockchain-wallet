@@ -15,6 +15,9 @@ namespace BlockchainWallet.Models.Dto
         public class Endpoint
         {
             public string GetBlocks { get; set; }
+
+            public string GetPendingTransactions { get; set; }
+
             public string PushTransaction { get; set; }
         }
     }

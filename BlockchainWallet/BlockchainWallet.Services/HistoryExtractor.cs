@@ -35,7 +35,7 @@
             while (isRunning)
             {
                 // get transactions from blocks and filter those ones that contain current address.
-                var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => (x.FromAddress == account || x.ToAddress == account) && x.Paid);
+                var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => (x.FromAddress == account || x.ToAddress == account));
                 //var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => (x.FromAddress == account || x.ToAddress == account));
 
                 foreach (var tran in neededTransaction)
@@ -54,6 +54,37 @@
                 else
                 {
                     isRunning = false;
+                }
+            }
+
+            success = true;
+
+            return (transactions, success);
+        }
+
+        public (List<Transaction> transactions, bool success) GetPendingTransactions(string account, string urlNodeAddress)
+        {
+            bool success = false;
+            List<Transaction> transactions = new List<Transaction>();
+
+            // get transactions from Node
+            var trans = this.GetTransactionsFromUrl(urlNodeAddress);
+
+            if (trans == null || !trans.Any())
+            {
+                //todo log error
+                return (transactions, success);
+            }
+
+            // get transactions from blocks and filter those ones that contain current address.
+            var neededTransaction = trans.Where(x => (x.FromAddress == account || x.ToAddress == account));
+            //var neededTransaction = blocks.SelectMany(x => x.Transactions).Where(x => (x.FromAddress == account || x.ToAddress == account));
+
+            foreach (var tran in neededTransaction)
+            {
+                if (!transactions.Contains(tran))
+                {
+                    transactions.Add(tran);
                 }
             }
 
@@ -87,6 +118,31 @@
             }
 
             return blocks;
+        }
+
+        private IEnumerable<Transaction> GetTransactionsFromUrl(string nodeAddress)
+        {
+            var transactionssAsJson = string.Empty;
+            var success = false;
+            (transactionssAsJson, success) = this.HttpRequestService.SendRequest(nodeAddress, string.Empty, "GET");
+
+            if (!success)
+            {
+                return Enumerable.Empty<Transaction>();
+            }
+
+            IEnumerable<Transaction> transactions = null;
+
+            try
+            {
+                transactions = JsonConvert.DeserializeObject<IEnumerable<Transaction>>(transactionssAsJson);
+            }
+            catch (Exception)
+            {
+                //todo log error
+            }
+
+            return transactions;
         }
     }
 }
