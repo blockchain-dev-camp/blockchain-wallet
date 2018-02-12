@@ -32,40 +32,40 @@
                 else
                 {
                     <div class="col col-sm-12">
-                        <br />
                         <div class="row">
-                            <div class="col col-sm-6 text-right">
+                            <div class="col col-sm-12 text-center">
                                 <div class="row">
-                                    <div class="col col-sm-12 offset-3">
+                                    <div class="col col-sm-12">
                                         @if (Model.Transactions.Count == 0)
                                         {
                                             <p>@Model.Description</p>
                                         }
                                         else
                                         {
-                                            <table>
+                                            <table class="table-bordered table" align="center">
                                                 <thead>
                                                     <tr>
-                                                        <td>TransactionId</td>
-                                                        <td>FromAddress</td>
-                                                        <td>ToAddress</td>
-                                                        <td>Value</td>
-                                                        <td>Paid</td>
-                                                        <td>DateReceived</td>
-                                                        <td>Fee</td>
+                                                        <th>TransactionId</th>
+                                                        <th>FromAddress</th>
+                                                        <th>ToAddress</th>
+                                                        <th>Value</th>
+                                                        <th>Paid</th>
+                                                        <th>DateReceived</th>
+                                                        <th>Fee</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
                                                 @foreach (var tran in Model.Transactions)
                                                 {
+                                                    var transDT = new DateTime(1970, 1, 1, 0, 0, 0).AddMilliseconds(long.Parse(tran.DateReceived));
                                                     <tr>
                                                         <td>@tran.TransactionId</td>
                                                         <td>@tran.FromAddress</td>
                                                         <td>@tran.ToAddress</td>
                                                         <td>@tran.Value</td>
                                                         <td>@tran.Paid</td>
-                                                        <td>@tran.DateReceived</td>
+                                                        <td>@transDT</td>
                                                         <td>@tran.Fee</td>
                                                     </tr>
                                                 }
