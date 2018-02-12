@@ -9,9 +9,19 @@
     margin: 30px auto;
     width: 100%;
     max-width: 100%;
+    padding: 0;
 }
 #createacc {
     margin-left: 10px;
+}
+
+td {
+    word-break: break-all;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .footer {
